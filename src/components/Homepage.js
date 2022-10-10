@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase.js';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import "./homepage.css";
 
 const Homepage = () => {
+  const [todo, setTodo] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,7 +29,13 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-      <h1>Homepage</h1>
+      <input
+        type="text"
+        placeholder="Add todo..."
+        value={todo}
+        onChange={(e) => setTodo(e.target.value)}
+      />
+      <button>add</button>
       <button onClick={handleSignOut}>sign out</button>
     </div>
   )
